@@ -1,4 +1,4 @@
-import json, os
+import json
 
 def load_tasks():
     try:
@@ -12,28 +12,26 @@ def save_tasks(data):
         json.dump(data, f, indent=4)
 
 def create_task():
-    # Prompt user for task name
-    task_name = input("Enter task name: ").strip()
+    task_name = input("If you wish to go back, enter '0'\nEnter task name: ").strip()
     if not task_name:
         print("Task name cannot be empty.")
         return
-
+    if task_name == "0":
+        print("Task creation cancelled successfully.")
+        return
     # Create a task dictionary with initial values
     new_task = {
         "name": task_name,
         "start_time": None,
         "total_time": 0,
-        "history": []  # Optional, for tracking work sessions later
+        "history": []
     }
-
     # Load current tasks, add the new task, and save back to file
     tasks = load_tasks()
     tasks.append(new_task)
     save_tasks(tasks)
 
     print(f"Task {task_name} created successfully!")
-
-
 
 def delete_task():
     tasks = load_tasks()

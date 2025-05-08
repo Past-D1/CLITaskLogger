@@ -3,23 +3,18 @@ from tools import summary, task_timer, data
 
 
 def main():
-    # Create tasks.json if it doesn't exist for some reason
-    try:
-        with open('tasks.json', 'x') as json_file:
-            json.dump([], json_file)
-    except FileExistsError:
-        pass
+    data.load_tasks()
     while True: # Main loop
         user_choice_menu = input("""
-                       What would you like to do?
-                       1. List all tasks
-                       2. Create a new task
-                       3. Delete a task
-                       4. Start working on a task
-                       5. Stop working on a task
-                       6. Show summary
-                       7. Exit
-                       Enter choice: """).strip()
+What would you like to do?
+1. List all tasks
+2. Create a new task
+3. Delete a task
+4. Start working on a task
+5. Stop working on a task
+6. Show summary
+7. Exit
+Enter choice: """).strip()
         if user_choice_menu == "1":
             data.list_tasks()
         elif user_choice_menu == '2': # User chose "Create a new task"

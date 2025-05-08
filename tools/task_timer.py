@@ -75,7 +75,6 @@ def stop():
 
     duration =  now - start_time
 
-
     selected_task['total_time'] += duration.total_seconds()
 
     selected_task['history'].append({
@@ -87,15 +86,5 @@ def stop():
 
     save_tasks(tasks)
 
-    total_seconds = int(duration.total_seconds())
-
-
-    # Keeping this for future reference on how to use the divmod(x, y) function, but it could absolutely be replaced with format_duration(duration)
-
-    # For divmod(x, y)
-    # quotient = x // y
-    # remainder = x % y
-
-    hours, remainder = divmod(total_seconds, 3600)  # ➡️ How many full hours?
-    minutes, seconds = divmod(remainder, 60)        # ➡️ How many full minutes, and leftover seconds?
+    hours, minutes, seconds = format_duration(duration)
     print(f"Added {hours} hours, {minutes} minutes, {seconds} seconds to '{selected_task['name']}'.")
